@@ -4,7 +4,7 @@ project(ros_workspace NONE)
 find_package(ament_cmake_core REQUIRED)
 
 # Collect current python 3 version
-execute_process(COMMAND python3 -c "from distutils import sysconfig; print(sysconfig.get_python_version())" OUTPUT_VARIABLE PYTHON_MAJOR_MINOR OUTPUT_STRIP_TRAILING_WHITESPACE)
+execute_process(COMMAND python -c "from distutils import sysconfig; print(sysconfig.get_python_version())" OUTPUT_VARIABLE PYTHON_MAJOR_MINOR OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 # Locate ament_package template files.
 if(WIN32)
