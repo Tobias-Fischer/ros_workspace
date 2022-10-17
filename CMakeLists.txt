@@ -3,18 +3,17 @@ project(ros_workspace NONE)
 
 find_package(ament_cmake_core REQUIRED)
 
-# Collect current python 3 version
-execute_process(COMMAND python3 -c "from distutils import sysconfig; print(sysconfig.get_python_version())" OUTPUT_VARIABLE PYTHON_MAJOR_MINOR OUTPUT_STRIP_TRAILING_WHITESPACE)
+find_package (Python COMPONENTS Interpreter Development)
 
 # Locate ament_package template files.
 if(WIN32)
   set(PYTHON_INSTALL_DIR "lib/site-packages")
   set(SHELL_EXT "bat")
 else()
-  set(PYTHON_INSTALL_DIR "lib/python${PYTHON_MAJOR_MINOR}/site-packages")
+  set(PYTHON_INSTALL_DIR "lib/python${Python_VERSION_MAJOR}${Python_VERSION_MINOR}/site-packages")
   set(SHELL_EXT "sh")
 endif()
-set(AMENT_PACKAGE_DIR "${CMAKE_INSTALL_PREFIX}/${PYTHON_INSTALL_DIR}/ament_package")
+set(AMENT_PACKAGE_DIR "${Python_SITELIB}/ament_package")
 if(NOT EXISTS "${AMENT_PACKAGE_DIR}")
   # Check for an .egg-link file and use the listed directory if it exists
   get_filename_component(AMENT_PACKAGE_EGG_LINK "${AMENT_PACKAGE_DIR}" DIRECTORY)
